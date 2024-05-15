@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Estado Actual{% endblock %}
+
+{% block content %}
+<h2>Estado Actual de la Actividad Solar</h2>
+<ul>
+    {% for item in data %}
+        <li><a href="{{ url_for('detail', item_id=item.id) }}">{{ item.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
