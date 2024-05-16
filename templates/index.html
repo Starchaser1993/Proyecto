@@ -6,4 +6,40 @@
 <h2>Bienvenido a Space Weather Live</h2>
 <p>Las últimas actualizaciones sobre la actividad solar y el clima espacial.</p>
 <a href="{{ url_for('view_data') }}">Ver Estado Actual</a>
+
+<!-- Agregar la imagen G5 con un título "Tormenta geomagnética" -->
+<h2>Tormenta geomagnética</h2>
+<a href="#" onclick="showImage('G5')">Ver Imagen</a>
+<div id="G5_image" style="display: none;">
+    <img src="{{ url_for('static', filename='images/G5.jpg') }}" alt="G5 - Tormenta geomagnética" class="small-img">
+</div>
+
+<!-- Agregar la imagen X8.7 con un título "Tormenta solar" -->
+<h2>Tormenta solar</h2>
+<a href="#" onclick="showImage('X8.7')">Ver Imagen</a>
+<div id="X8.7_image" style="display: none;">
+    <img src="{{ url_for('static', filename='images/X8.7.jpg') }}" alt="X8.7 - Tormenta solar" class="small-img">
+</div>
+
+<!-- Añadir la funcionalidad para mostrar las imágenes de las actualizaciones -->
+<h2>Actualizaciones Solares</h2>
+{% for post in posts %}
+    <h3>{{ post.title }}</h3>
+    <p>{{ post.content }}</p>
+    <a href="#" onclick="showImage('{{ post.id }}')">Ver Imagen</a>
+    <div id="{{ post.id }}_image" style="display: none;">
+        <img src="{{ url_for('static', filename='images/' + post.image) }}" alt="{{ post.title }}" class="small-img">
+    </div>
+{% endfor %}
+
+<script>
+    function showImage(imageId) {
+        var imageDiv = document.getElementById(imageId + '_image');
+        if (imageDiv.style.display === 'none') {
+            imageDiv.style.display = 'block';
+        } else {
+            imageDiv.style.display = 'none';
+        }
+    }
+</script>
 {% endblock %}
